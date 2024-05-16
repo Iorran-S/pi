@@ -5,13 +5,13 @@ Este é um projeto de cadastro simples desenvolvido em Django. Ele permite que o
 ## Estrutura do Projeto
 
 pi/
-├── app_de_cadastro/ # Aplicativo principal de cadastro
-├── pi/ # Configurações do projeto Django
-├── templates/ # Arquivos de template HTML
-├── manage.py # Script de gerenciamento do Django
-├── requirements.txt # Dependências do projeto
-├── .env # Variáveis de ambiente (não incluído no repositório)
-└── README.md # Este arquivo
+├── app_de_cadastro/
+├── pi/
+├── templates/
+├── manage.py
+├── requirements.txt
+├── .env
+└── README.md
 
 ## Pré-requisitos
 
