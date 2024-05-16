@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e6e6fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin: 5% auto;
+            padding: 2%;
+            background-color: #fff;
+            border-radius: 2%;
+            box-shadow: 0 0 2% rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+            position: relative;
+            width: auto;
+            margin-left: 1%;
+            margin-right: 1%;
+        }
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 2%;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2%;
+            overflow-x: auto;
+        }
+        th, td {
+            padding-top: 1.5%;;
+            padding-bottom: 2.5%;
+            text-align: center;
+            border-bottom: 0.1vh solid #ddd;
+        }
+        th {
+            background-color: #a200ff63;
+            color: #000;
+            font-size: 120%;
+            padding: 50px;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 2%;
+        }
+        .button {
+            width: 10%;
+            padding: 2%;
+            margin-right: 2%;
+            background-color: #a200ff63;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 200%;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .button:hover {
+            background-color: #ff0080;
+        }
+        form {
+            margin-bottom: 2%;
+        }
+        label {
+            display: block;
+            margin-bottom: 2%;
+        }
+        .cell {
+            min-width: 120px;
+            max-height: 200px;
+            overflow: auto;
+            text-align: center;
+            border: 0.1vh solid #ccc;
+            border-radius: 5px;
+            padding: 8px;
+            margin-bottom: 4%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Consulta de Pessoas Registradas</h1>
+    <form method="POST" action="{% url 'deletar_usuario' %}">
+        {% csrf_token %}
+        <input type="hidden" name="usuario_ids" id="usuario_ids">
+        <table>
+            <thead>
+                <tr>
+                    <th>Selecionar</th>
+                    <th>Nome Completo</th>
+                    <th>Idade</th>
+                    <th>Responsável 1</th>
+                    <th>Responsável 2</th>
+                    <th>Telefone 1</th>
+                    <th>Telefone 2</th>
+                    <th>Principais Serviços</th>
+                    <th>Telefone 3</th>
+                    <th>Telefone 4</th>
+                    <th>Pessoa de Referência 1</th>
+                    <th>Pessoa de Referência 2</th>
+                    <th>Origem do Encaminhamento</th>
+                    <th>Demanda Inicial</th>
+                    <th>Início dos Atendimentos</th>
+                    <th>Data de Cadastro</th>
+                    <th>Profissional</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pessoa in pessoas %}
+                <tr>
+                    <td><input type="checkbox" name="selecionar_pessoa" value="{{ pessoa.id }}"></td>
+                    <td><div class="cell">{{ pessoa.nome }}</div></td>
+                    <td><div class="cell">{{ pessoa.idade }}</div></td>
+                    <td><div class="cell">{{ pessoa.responsavel_1 }}</div></td>
+                    <td><div class="cell">{{ pessoa.responsavel_2 }}</div></td>
+                    <td><div class="cell">{{ pessoa.telefone_1 }}</div></td>
+                    <td><div class="cell">{{ pessoa.telefone_2 }}</div></td>
+                    <td><div class="cell">{{ pessoa.principais_servicos }}</div></td>
+                    <td><div class="cell">{{ pessoa.telefone_3 }}</div></td>
+                    <td><div class="cell">{{ pessoa.telefone_4 }}</div></td>
+                    <td><div class="cell">{{ pessoa.pessoa_referencia_1 }}</div></td>
+                    <td><div class="cell">{{ pessoa.pessoa_referencia_2 }}</div></td>
+                    <td><div class="cell">{{ pessoa.origem_do_encaminhamento }}</div></td>
+                    <td><div class="cell">{{ pessoa.demanda_inicial }}</div></td>
+                    <td><div class="cell">{{ pessoa.inicio_dos_atendimentos }}</div></td>
+                    <td><div class="cell">{{ pessoa.log_de_cadastro }}</div></td>
+                    <td><div class="cell">{{ pessoa.profissional }}</div></td>                
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="button-container">
+            <button type="submit" class="button" id="delete-button">Deletar</button>
+            <a href="{% url 'menu' %}" class="button">Menu Inicial</a>
+            <a href="{% url 'registrar_usuario' %}" class="button">Cadastrar</a>
+            <a href="{% url 'gerar_relatorio_excel' %}" class="button" id="generate-report-button">Relatório</a>
+            <a href="{% url 'user_logout' %}" class="button">Deslogar</a>
+        </div>
+    </form>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"][name="selecionar_pessoa"]');
+            const usuarioIdsInput = document.getElementById("usuario_ids");
+            const deleteButton = document.getElementById("delete-button");
+            const reportButton = document.getElementById('generate-report-button');
+    
+            checkboxes.forEach(function(checkbox) {
+                checkbox.addEventListener("change", function() {
+                    const selectedIds = Array.from(checkboxes).filter(cb => cb.checked).map(cb => cb.value);
+                    usuarioIdsInput.value = selectedIds.join(',');
+                });
+            });
+    
+            deleteButton.addEventListener('click', function(event) {
+                const selectedPersons = document.querySelectorAll('input[name="selecionar_pessoa"]:checked');
+                if (selectedPersons.length > 0) {
+                    const personNames = Array.from(selectedPersons).map(cb => cb.closest('tr').querySelector('td:nth-child(2) .cell').textContent).join(', ');
+                    if (!confirm(`Tem certeza que deseja deletar os seguintes usuários? ${personNames}`)) {
+                        event.preventDefault();
+                    }
+                } else {
+                    alert("Por favor, selecione pelo menos uma pessoa para deletar.");
+                    event.preventDefault();
+                }
+            });
+    
+            reportButton.addEventListener('click', function(event) {
+                event.preventDefault();
+                const selectedPersons = document.querySelectorAll('input[name="selecionar_pessoa"]:checked');
+                if (selectedPersons.length > 0) {
+                    const userIds = Array.from(selectedPersons).map(sp => sp.value).join(',');
+                    window.location.href = `{% url 'gerar_relatorio_excel' %}?usuario_id=${userIds}`;
+                } else {
+                    alert("Por favor, selecione pelo menos uma pessoa para gerar o relatório.");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

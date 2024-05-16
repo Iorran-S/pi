@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Napsi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e6e6fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        form {
+            background-color: #ffffff;
+            border: 2% solid #a200ff63;
+            border-radius: 2%;
+            width: 40%;
+            padding: 4%;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 4%;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 90%;
+            padding: 2%;
+            margin-bottom: 4%;
+            border: 1px solid #ccc;
+            border-radius: 2%;
+        }
+        button[type="submit"] {
+            width: 100%;
+            padding: 3%;
+            background-color: #a200ff63;
+            color: #000;
+            border: none;
+            border-radius: 2%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button[type="submit"]:hover {
+            background-color: #ff0080;
+        }
+    </style>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <h1>NAPSI</h1>
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>

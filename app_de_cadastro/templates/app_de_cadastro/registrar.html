@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Novo Usuário</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e6e6fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 60%;
+            margin: 5% auto; /* Centraliza horizontalmente */
+            padding: 2%;
+            background-color: #fff;
+            border-radius: 1%;
+            box-shadow: 0 0 1% rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 3%;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 1%;
+        }
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 2%;
+            margin-bottom: 3%;
+            border: 0.1% solid #000000;
+            border-radius: 0.5%;
+            box-sizing: border-box;
+        }
+        button[type="submit"],
+        .button {
+            width: 20%;
+            padding: 2%;
+            background-color: #a200ff63;
+            color: #000000;
+            border: none;
+            border-radius: 2%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 200%;
+        }
+        button[type="submit"]:hover,
+        .button:hover {
+            background-color: #a200ff;
+            color: #ffffff;
+        }
+        .button {
+            text-align: center;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .button-div {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Registrar Novo Usuário</h1>
+        <div class="button-div">
+            <a href="{% url 'menu' %}" class="button">Menu</a>
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            <label for="id_nome">Nome Completo:</label>
+            {{ form.nome }}
+            <label for="id_idade">Idade:</label>
+            {{ form.idade }}
+            <label for="id_responsavel_1">Responsável 1:</label>
+            {{ form.responsavel_1 }}
+            <label for="id_responsavel_2">Responsável 2:</label>
+            {{ form.responsavel_2 }}
+            <label for="id_telefone_1">Telefone 1:</label>
+            {{ form.telefone_1 }}
+            <label for="id_telefone_2">Telefone 2:</label>
+            {{ form.telefone_2 }}
+            <label for="id_principais_servicos">Principais Serviços:</label>
+            {{ form.principais_servicos }}
+            <label for="id_telefone_3">Telefone 3:</label>
+            {{ form.telefone_3 }}
+            <label for="id_telefone_4">Telefone 4:</label>
+            {{ form.telefone_4 }}
+            <label for="id_pessoa_referencia_1">Pessoa de Referência 1:</label>
+            {{ form.pessoa_referencia_1 }}
+            <label for="id_pessoa_referencia_2">Pessoa de Referência 2:</label>
+            {{ form.pessoa_referencia_2 }}
+            <label for="id_origem_do_encaminhamento">Origem do Encaminhamento:</label>
+            {{ form.origem_do_encaminhamento }}
+            <label for="id_demanda_inicial">Demanda Inicial:</label>
+            {{ form.demanda_inicial }}
+            <label for="id_inicio_dos_atendimentos">Início dos Atendimentos:</label>
+            {{ form.inicio_dos_atendimentos }}
+            <label for="id_profissional">Profissional:</label>
+            {{ form.profissional }}
+            <div class="button-container">
+                <button type="submit" class="button">Registrar</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
