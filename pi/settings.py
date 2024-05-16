@@ -19,9 +19,9 @@ env = environ.Env(
 )
 
 # Leia o arquivo .env
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
-
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Secret key e debug mode
 SECRET_KEY = env('SECRET_KEY')
