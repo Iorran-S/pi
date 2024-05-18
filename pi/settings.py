@@ -26,6 +26,14 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+# Configuração de arquivos estáticos adicionais (opcional)
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+# Configuração para WhiteNoise
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # Secret key e debug mode
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
@@ -42,11 +50,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app_de_cadastro'
+    'app_de_cadastro',
+    'whitenoise.runserver_nostatic',  # Adicione isso antes de 'django.contrib.staticfiles'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Adicione WhiteNoise aqui
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
