@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+    {% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,61 +8,109 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #e6e6fa;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593); /* Fundo degradê */
         }
+
         .menu-container {
-            background-color: #ffffff7e;
-            border: 2% solid #a200ff63;
+            background-image: url("{% static 'Menu.jpg' %}");
+            background-size: cover; /* Ajusta o tamanho da imagem para cobrir todo o container */
+            background-position: center; /* Centraliza a imagem */
+            border: 2% solid rgba(162, 0, 255, 0.4);
             border-radius: 2%;
-            width: 90%;
-            height: 90%;
+            width: 100%;
+            height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
         }
+
         h1 {
             text-align: center;
-            margin-bottom: 4%;
+            margin-bottom: 2%;
+            color: #ffffff; /* Cor do texto do título */
         }
-        ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            width: 50%;
+
+        .octagon-menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2%;
+            width: 100%;
+        }
+
+        .octagon-item {
+            width: 15%; /* Ocupa 30% da largura da tela */
+            height: 15vw; /* Ocupa 30% da altura da tela */
+            position: relative;
+            list-style: none;
+            clip-path: polygon(27% 0%, 73% 0%, 100% 27%, 100% 73%, 73% 100%, 27% 100%, 0% 73%, 0% 27%);
+            cursor: pointer; /* Adiciona cursor de ponteiro */
+        }
+
+        .octagon-item .oct-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Centraliza o conteúdo */
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 150%;
+            background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593); /* Fundo degradê */
+            border-radius: 10%;
+            transition: background-color 0.3s;
+            text-align: center; /* Centraliza o texto dentro do contêiner */
+        }
+
+        .octagon-item:hover .oct-content {
+            background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593); /* Fundo degradê no hover */
+        }
+
+        .octagon-item .oct-content span {
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            word-wrap: break-word; /* Permite que o texto quebre */
+        }
+        .botom {
+            position: relative; /* Alterado para 'relative' */
+            margin-top: auto; /* Isso empurrará a div para a parte inferior do menu-container */
+            width: 60%;
             text-align: center;
         }
-        li {
-            margin-bottom: 4%;
-        }
-        a {
-            display: block;
-            padding: 4% 8%;
-            text-decoration: none;
-            background-color: #a200ff63;
-            color: #000;
-            border-radius: 1%;
-            transition: background-color 0.3s;
-        }
-        a:hover {
-            background-color: #ff0080;
+
+        .botom img {
+            max-width: 60%; /* Reduzi a largura máxima da imagem */
+            height: auto; /* Mantém a proporção da imagem */
         }
     </style>
 </head>
+
 <body>
     <div class="menu-container">
         <h1>Menu</h1>
-        <ul>
-            <li><a href="{% url 'registrar_usuario' %}">Cadastrar Novos Usuários</a></li>
-            <li><a href="{% url 'lista_de_pessoas' %}">Consultar Usuários</a></li>
-            <li><a href="{% url 'user_logout' %}">Deslogar</a></li>
+        <ul class="octagon-menu">
+            <li class="octagon-item" onclick="location.href='{% url 'registrar_usuario' %}'">
+                <div class="oct-content"><span>Cadastrar Novos Usuários</span></div>
+            </li>
+            <li class="octagon-item" onclick="location.href='{% url 'lista_de_pessoas' %}'">
+                <div class="oct-content"><span>Consultar Usuários</span></div>
+            </li>
+            <li class="octagon-item" onclick="location.href='{% url 'user_logout' %}'">
+                <div class="oct-content"><span>Deslogar</span></div>
+            </li>
         </ul>
+            <img src="{% static 'Logo_Napsi_UNAS.jpg' %}" class='botom' alt="logo">
     </div>
 </body>
 </html>

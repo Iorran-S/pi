@@ -4,73 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consulta</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #e6e6fa;
+            background-color:  #e6e6fa;
             margin: 0;
             padding: 0;
         }
-        .container {
-            margin: 5% auto;
-            padding: 2%;
-            background-color: #fff;
-            border-radius: 2%;
-            box-shadow: 0 0 2% rgba(0, 0, 0, 0.1);
-            overflow-x: auto;
-            position: relative;
-            width: auto;
-            margin-left: 1%;
-            margin-right: 1%;
-        }
-        h1, h2 {
+        h1 {
             text-align: center;
-            margin-bottom: 2%;
+            margin-bottom: 4%;
+            color: #b44593; /* Cor do título */
         }
         table {
             width: 100%;
-            border-collapse: collapse;
+            border-collapse: collapse; /* Mescla as bordas das células */
             margin-bottom: 2%;
             overflow-x: auto;
+            background-color: #ffbad5; /* Fundo degradê */
         }
         th, td {
-            padding-top: 1.5%;;
-            padding-bottom: 2.5%;
+            border: 1px solid black; /* Bordas de 1 pixel de largura e preta */
+            padding-top: 1.5%;
+            padding-bottom: 1.5%;
             text-align: center;
             border-bottom: 0.1vh solid #ddd;
         }
-        th {
-            background-color: #a200ff63;
-            color: #000;
-            font-size: 120%;
-            padding: 50px;
-        }
         tr:nth-child(even) {
-            background-color: #f2f2f2;
+            background-color: #edbfff;
         }
         tr:hover {
-            background-color: #ddd;
+            background-color: #ffe1a096;
         }
         .button-container {
-            text-align: center;
+            display: flex;
+            justify-content: space-around; /* Espaça os botões igualmente ao longo do container */
+            align-items: center;           /* Alinha os botões verticalmente ao centro */
+            margin-top: 2%;
+            width: 100%;                   /* Faz o container ocupar 100% da largura da tela */
+            box-sizing: border-box;        /* Inclui padding e border na largura e altura */
+        }
+        .button-container2 {
+            text-align:left;
+            margin-left: 2%;
             margin-top: 2%;
         }
-        .button {
-            width: 10%;
-            padding: 2%;
-            margin-right: 2%;
-            background-color: #a200ff63;
-            color: #000;
+        .nav-button {
+            padding: 15px 30px;
+            background-color: #b44593; /* Cor do botão */
+            color: #fff; /* Cor do texto do botão */
             border: none;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
-            font-size: 200%;
             text-decoration: none;
             display: inline-block;
         }
-        .button:hover {
-            background-color: #ff0080;
+        .nav-button:hover {
+            background-color: #eeae24d2;
         }
         form {
             margin-bottom: 2%;
@@ -79,75 +71,72 @@
             display: block;
             margin-bottom: 2%;
         }
-        .cell {
-            min-width: 120px;
-            max-height: 200px;
-            overflow: auto;
-            text-align: center;
-            border: 0.1vh solid #ccc;
-            border-radius: 5px;
-            padding: 8px;
-            margin-bottom: 4%;
-        }
     </style>
 </head>
+
 <body>
     <h1>Consulta de Pessoas Registradas</h1>
     <form method="POST" action="{% url 'deletar_usuario' %}">
         {% csrf_token %}
         <input type="hidden" name="usuario_ids" id="usuario_ids">
-        <table>
-            <thead>
-                <tr>
-                    <th>Selecionar</th>
-                    <th>Nome Completo</th>
-                    <th>Idade</th>
-                    <th>Responsável 1</th>
-                    <th>Responsável 2</th>
-                    <th>Telefone 1</th>
-                    <th>Telefone 2</th>
-                    <th>Principais Serviços</th>
-                    <th>Telefone 3</th>
-                    <th>Telefone 4</th>
-                    <th>Pessoa de Referência 1</th>
-                    <th>Pessoa de Referência 2</th>
-                    <th>Origem do Encaminhamento</th>
-                    <th>Demanda Inicial</th>
-                    <th>Início dos Atendimentos</th>
-                    <th>Data de Cadastro</th>
-                    <th>Profissional</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for pessoa in pessoas %}
-                <tr>
-                    <td><input type="checkbox" name="selecionar_pessoa" value="{{ pessoa.id }}"></td>
-                    <td><div class="cell">{{ pessoa.nome }}</div></td>
-                    <td><div class="cell">{{ pessoa.idade }}</div></td>
-                    <td><div class="cell">{{ pessoa.responsavel_1 }}</div></td>
-                    <td><div class="cell">{{ pessoa.responsavel_2 }}</div></td>
-                    <td><div class="cell">{{ pessoa.telefone_1 }}</div></td>
-                    <td><div class="cell">{{ pessoa.telefone_2 }}</div></td>
-                    <td><div class="cell">{{ pessoa.principais_servicos }}</div></td>
-                    <td><div class="cell">{{ pessoa.telefone_3 }}</div></td>
-                    <td><div class="cell">{{ pessoa.telefone_4 }}</div></td>
-                    <td><div class="cell">{{ pessoa.pessoa_referencia_1 }}</div></td>
-                    <td><div class="cell">{{ pessoa.pessoa_referencia_2 }}</div></td>
-                    <td><div class="cell">{{ pessoa.origem_do_encaminhamento }}</div></td>
-                    <td><div class="cell">{{ pessoa.demanda_inicial }}</div></td>
-                    <td><div class="cell">{{ pessoa.inicio_dos_atendimentos }}</div></td>
-                    <td><div class="cell">{{ pessoa.log_de_cadastro }}</div></td>
-                    <td><div class="cell">{{ pessoa.profissional }}</div></td>                
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Selecionar</th>
+                        <th>Nome Completo</th>
+                        <th>Idade</th>
+                        <th>Responsável 1</th>
+                        <th>Responsável 2</th>
+                        <th>Telefone 1</th>
+                        <th>Telefone 2</th>
+                        <th>Principais Serviços</th>
+                        <th>Telefone 3</th>
+                        <th>Telefone 4</th>
+                        <th>Pessoa de Referência 1</th>
+                        <th>Pessoa de Referência 2</th>
+                        <th>Origem do Encaminhamento</th>
+                        <th>Demanda Inicial</th>
+                        <th>Início dos Atendimentos</th>
+                        <th>Data de Cadastro</th>
+                        <th>Profissional</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pessoa in pessoas %}
+                    <tr>
+                        <td><input class="form-check-input" type="checkbox" name="selecionar_pessoa"
+                                value="{{ pessoa.id }}"></td>
+                        <td>{{ pessoa.nome }}</td>
+                        <td>{{ pessoa.idade }}</td>
+                        <td>{{ pessoa.responsavel_1 }}</td>
+                        <td>{{ pessoa.responsavel_2 }}</td>
+                        <td>{{ pessoa.telefone_1 }}</td>
+                        <td>{{ pessoa.telefone_2 }}</td>
+                        <td>{{ pessoa.principais_servicos }}</td>
+                        <td>{{ pessoa.telefone_3 }}</td>
+                        <td>{{ pessoa.telefone_4 }}</td>
+                        <td>{{ pessoa.pessoa_referencia_1 }}</td>
+                        <td>{{ pessoa.pessoa_referencia_2 }}</td>
+                        <td>{{ pessoa.origem_do_encaminhamento }}</td>
+                        <td>{{ pessoa.demanda_inicial }}</td>
+                        <td>{{ pessoa.inicio_dos_atendimentos }}</td>
+                        <td>{{ pessoa.log_de_cadastro }}</td>
+                        <td>{{ pessoa.profissional }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
         <div class="button-container">
-            <button type="submit" class="button" id="delete-button">Deletar</button>
-            <a href="{% url 'menu' %}" class="button">Menu Inicial</a>
-            <a href="{% url 'registrar_usuario' %}" class="button">Cadastrar</a>
-            <a href="{% url 'gerar_relatorio_excel' %}" class="button" id="generate-report-button">Relatório</a>
-            <a href="{% url 'user_logout' %}" class="button">Deslogar</a>
+            <a href="{% url 'menu' %}" class="nav-button">Menu Inicial</a>
+            <a href="{% url 'registrar_usuario' %}" class="nav-button">Cadastrar</a>
+            <a href="{% url 'gerar_relatorio_excel' %}" class="nav-button" id="generate-report-button">Relatório</a>
+            <a href="{% url 'user_logout' %}" class="nav-button">Deslogar</a>
+        </div>
+        <BR></BR>
+        <div class="button-container2">
+            <button type="submit" class="btn btn-danger" id="delete-button">Deletar</button>
         </div>
     </form>
     <script>
@@ -167,8 +156,8 @@
             deleteButton.addEventListener('click', function(event) {
                 const selectedPersons = document.querySelectorAll('input[name="selecionar_pessoa"]:checked');
                 if (selectedPersons.length > 0) {
-                    const personNames = Array.from(selectedPersons).map(cb => cb.closest('tr').querySelector('td:nth-child(2) .cell').textContent).join(', ');
-                    if (!confirm(`Tem certeza que deseja deletar os seguintes usuários? ${personNames}`)) {
+                    let personNames = Array.from(selectedPersons).map(cb => cb.closest('tr').querySelector('td:nth-child(2)').textContent).join(', ');
+                    if (!confirm(`Tem certeza que deseja deletar os seguintes registros? ${personNames}`)) {
                         event.preventDefault();
                     }
                 } else {
@@ -182,12 +171,12 @@
                 const selectedPersons = document.querySelectorAll('input[name="selecionar_pessoa"]:checked');
                 if (selectedPersons.length > 0) {
                     const userIds = Array.from(selectedPersons).map(sp => sp.value).join(',');
-                    window.location.href = `{% url 'gerar_relatorio_excel' %}?usuario_id=${userIds}`;
+                    window.location.href = "{% url 'gerar_relatorio_excel' %}?usuario_id=" + userIds;
                 } else {
                     alert("Por favor, selecione pelo menos uma pessoa para gerar o relatório.");
                 }
             });
         });
-    </script>
+    </script>    
 </body>
 </html>

@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+    {% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Novo Usuário</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #e6e6fa;
-            margin: 0;
-            padding: 0;
+            background-image: url("{% static 'Registrar.jpg' %}");
+            background-size:200%; /* Ajusta o tamanho da imagem para cobrir todo o container */
+            background-position: center; /* Centraliza a imagem */
         }
         .container {
             max-width: 60%;
@@ -41,40 +41,40 @@
             box-sizing: border-box;
         }
         button[type="submit"],
-        .button {
-            width: 20%;
-            padding: 2%;
-            background-color: #a200ff63;
-            color: #000000;
-            border: none;
-            border-radius: 2%;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            font-size: 200%;
-        }
-        button[type="submit"]:hover,
-        .button:hover {
-            background-color: #a200ff;
-            color: #ffffff;
-        }
-        .button {
-            text-align: center;
-        }
         .button-container {
             display: flex;
-            justify-content: center;
-            margin-top: 10px;
+            justify-content: space-around; /* Espaça os botões igualmente ao longo do container */
+            align-items: center;           /* Alinha os botões verticalmente ao centro */
+            margin-top: 2%;
+            width: 100%;                   /* Faz o container ocupar 100% da largura da tela */
+            box-sizing: border-box;        /* Inclui padding e border na largura e altura */
         }
-        .button-div {
-            text-align: center;
+        .button-container2 {
+            text-align:left;
+            margin-left: 2%;
+            margin-top: 2%;
+        }
+        .nav-button {
+            padding: 15px 30px;
+            background-color: #b44593; /* Cor do botão */
+            color: #fff; /* Cor do texto do botão */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .nav-button:hover {
+            background-color: #eeae24d2;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Registrar Novo Usuário</h1>
-        <div class="button-div">
-            <a href="{% url 'menu' %}" class="button">Menu</a>
+        <div class="button-container">
+            <a href="{% url 'menu' %}" class="nav-button">Menu Inicial</a>
         </div>
         <form method="post">
             {% csrf_token %}
@@ -108,8 +108,8 @@
             {{ form.inicio_dos_atendimentos }}
             <label for="id_profissional">Profissional:</label>
             {{ form.profissional }}
-            <div class="button-container">
-                <button type="submit" class="button">Registrar</button>
+            <div class="container">
+                <button type="submit" class="nav-button">Registrar</button>
             </div>
         </form>
     </div>

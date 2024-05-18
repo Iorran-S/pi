@@ -1,44 +1,52 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+    {% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuário Registrado</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #e6e6fa;
-            margin: 0;
-            padding: 0;
+            background-image: url("{% static 'Registrado.jpg' %}");
+            background-size: cover; /* Ajusta a imagem para cobrir toda a área do corpo */
+            background-position: center; /* Centraliza a imagem no corpo */
+            background-repeat: no-repeat; /* Evita que a imagem seja repetida */
         }
         .container {
-            max-width: 600px;
-            margin: 50px auto;
+            width: 50%;
+            height: 50%;
+            position: fixed; /* Define o posicionamento fixo em relação à janela do navegador */
+            top: 50%; /* Posiciona o contêiner a 50% da parte superior */
+            left: 50%; /* Posiciona o contêiner a 50% da esquerda */
+            transform: translate(-50%, -50%); /* Centraliza o contêiner usando transformações */
             padding: 20px;
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.8); /* Fundo semi-transparente */
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
         h1 {
             margin-bottom: 20px;
-            color: #a200ff; /* Cor semelhante à do botão do formulário */
+            color: #000000; /* Cor do texto do título */
         }
         p {
             margin-bottom: 20px;
+            color: #333333; /* Cor do texto do parágrafo */
         }
         a {
             display: inline-block;
             padding: 10px 20px;
-            background-color: #a200ff63; /* Cor semelhante à do botão do formulário */
+            background-color: rgba(255, 255, 255, 0.5); /* Fundo semi-transparente */
             color: #000000;
             text-decoration: none;
             border-radius: 5px;
-            transition: background-color 0.3s;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            transition: background-color 0.3s, color 0.3s;
         }
         a:hover {
-            background-color: #a200ff; /* Cor semelhante à do botão do formulário */
-            color: #ffffff;
+            background-color: #ffffff; /* Fundo no hover */
+            color: #b44593; /* Cor do texto no hover */
         }
     </style>
 </head>
