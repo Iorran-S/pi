@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import RedirectView
+from django.conf import settings
+from django.conf.urls.static import static
 
 # Configuração das URLs da aplicação
 urlpatterns = [
@@ -13,4 +15,4 @@ urlpatterns = [
     # URL para incluir as URLs da aplicação 'app_de_cadastro'
     # Certifique-se de adaptar o caminho ('app_de_cadastro.urls') conforme necessário
     path('app_de_cadastro/', include('app_de_cadastro.urls')),
-]
+]  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
